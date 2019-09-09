@@ -1,0 +1,55 @@
+NAME: John Tran
+EMAIL: johntran627@gmail.com
+ID: 005183495
+SLIPDAYS: 3
+
+
+All the tutorials that I used in order to finish this lab
+
+https://linux.die.net/man/3/getopt_long
+http://man7.org/linux/man-pages/man3/strerror.3.html
+http://man7.org/linux/man-pages/man2/open.2.html
+http://man7.org/linux/man-pages/man2/close.2.html
+https://linux.die.net/man/2/creat
+http://man7.org/linux/man-pages/man2/signal.2.html
+http://man7.org/linux/man-pages/man2/read.2.html
+https://linux.die.net/man/2/write
+http://man7.org/linux/man-pages/man2/dup.2.html
+https://stackoverflow.com/questions/18986351/what-is-the-simplest-standard-conform-way-to-produce-a-segfault-in-c
+
+fd_juggling.html
+TA Slides
+
+
+DESCRIPTION
+lab0.c: A program that copies its standard input to its standard output by reading from file
+descripto 0 (until encountering an end of file) and writing to file descriptor 1. 
+The program has the following option arguments:
+--input=filename ... use the specified file as standard input (instead of what is already being used as standard input) 
+If you are unable to open the specified input file, report the failure (on stderr, file descriptor 2) using fprintf(3), and exit(2) with status 1.
+--output=filename ... create the specified file and use it as standard output (instead of whatever is already being used as standard output) 
+If the file already exists, truncate it to zero size. If you are unable to create or truncate the specified output file, report the failure (on stderr, file descriptor 2) using fprintf(3), and exit(2) with status 2.
+--segfault ... force a segmentation fault (e.g., by calling a subroutine that sets a char * pointer to NULL and then stores through the null pointer). If this argument is specified, do it immediately, and do not copy from stdin to stdout.
+--catch ... use signal(2) to register a SIGSEGV handler that catches the segmentation fault, logs an error message (on stderr, file descriptor 2) and exit(2) with status 4.
+--dump-core ... dump core on segmentation faults.
+
+The program would produce the following exit codes:
+0 - when it successfully copy input to output
+1 - when it encounters unrecognized argument
+2 - when it's unable to open input file
+3 - when it's unable to open output file
+4 - when it catches a segfault and receives SIGSEGV
+
+
+backtrace.png: a screenshot taken when the program run the argument --segfault under gdb and also called the stack trace
+
+breakpoint.png: a screen shot taken when the program set a break point where the null pointer is and then run the argument --segfault and printed out the value of the pointer under gdb
+
+Makefile: contains the following targets: default, check, clean, dist
+
+The smoke tests:
+inAndOutTest: tests for normal input and output
+badInput: tests for bad input
+badOutput: tests for bad output
+badArg: tests for bad argument
+segfaultTest: tests for segmentation fault

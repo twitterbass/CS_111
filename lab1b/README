@@ -1,0 +1,45 @@
+# NAME: John Tran
+# EMAIL: johntran627@gmail.com
+# UID: 005183495
+# SLIPDAYS: 5
+
+
+=================
+lab1b-client.c
+=================
+The client program opens a connection to a server with the option --port=portNum rather than
+sending it directly to a shell. The other options are --log=fileName which maintains a
+record of data sent and received over the socket and --encrypt=fileName which contains a key
+for encryption and decryption. The client sends input from the keyboard to the socket (while
+echoing to the display), and input from the socket to the display.
+
+
+=================
+lab1b-server.c
+=================
+The server program connects with the client, receives the client's commands and sends them
+to the shell, and will "serve" the client the outputs of those commands. The server program
+has two options: --port=portNum which specifies the port number to connect, and
+--encrypt=fileName which contains a key for encryption and decryption.
+
+
+================
+my.key
+================
+Contains a key string
+
+
+===============
+Makefile
+===============
+Contains code to build the program with -Wall and -Wextra options, a tarball, and clean &
+dist target.
+
+
+===============
+References
+===============
+
+https://www.thegeekstuff.com/2012/07/c-file-handling/
+http://www.cs.rpi.edu/~moorthy/Courses/os98/Pgms/socket.html
+TA Slides

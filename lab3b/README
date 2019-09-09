@@ -1,0 +1,10 @@
+# NAME: John Tran
+# EMAIL: johntran627@gmail.com
+# UID: 005183495
+
+
+README: descriptions of each included file
+
+Makefile: builds the program, makes tarball, and cleans up files
+
+lab3b.py: a program to anylyze a file system summary and report on all discovered inconsistencies
