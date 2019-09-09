@@ -1,0 +1,268 @@
+Total: 2540 samples
+    1658  65.3%  65.3%     1666  65.6% thread_list_insert
+     831  32.7%  98.0%      850  33.5% thread_list_delete
+      24   0.9%  98.9%       24   0.9% thread_list_length
+      18   0.7%  99.6%       19   0.7% SortedList_lookup
+       7   0.3%  99.9%        7   0.3% __strcmp_sse42
+       1   0.0% 100.0%        8   0.3% SortedList_insert
+       1   0.0% 100.0%        1   0.0% _init
+       0   0.0% 100.0%     2540 100.0% __clone
+       0   0.0% 100.0%     2540 100.0% list_operation
+       0   0.0% 100.0%       19   0.7% normal_SortedList_delete
+       0   0.0% 100.0%     2540 100.0% start_thread
+ROUTINE ====================== list_operation in /w/home.21/cs/ugrad/luant/cs111/lab2b/lab2_list.c
+     0   2540 Total samples (flat / cumulative)
+     .      .  139:       normal_SortedList_delete(list, elements[i].key);
+     .      .  140:     }
+     .      .  141:   }
+     .      .  142: }
+     .      .  143: 
+---
+     .      .  144: void* list_operation(void *threadInfo) {
+     .      .  145:   struct ThreadInfo *info = (struct ThreadInfo*) threadInfo;
+     .   1666  146:   thread_list_insert(info->index);
+     .     24  147:   thread_list_length();
+     .    850  148:   thread_list_delete(info->index);
+     .      .  149:   return NULL;  
+     .      .  150: }
+---
+     .      .  151: 
+     .      .  152: char* random_key_generator(int length) {
+     .      .  153:   int i;
+     .      .  154:   char *key = (char*) malloc(length + 1);
+     .      .  155:   for (i = 0; i < length; i++)
+ROUTINE ====================== list_operation in /w/home.21/cs/ugrad/luant/cs111/lab2b/lab2_list.c
+     0   2540 Total samples (flat / cumulative)
+     .      .  139:       normal_SortedList_delete(list, elements[i].key);
+     .      .  140:     }
+     .      .  141:   }
+     .      .  142: }
+     .      .  143: 
+---
+     .      .  144: void* list_operation(void *threadInfo) {
+     .      .  145:   struct ThreadInfo *info = (struct ThreadInfo*) threadInfo;
+     .   1666  146:   thread_list_insert(info->index);
+     .     24  147:   thread_list_length();
+     .    850  148:   thread_list_delete(info->index);
+     .      .  149:   return NULL;  
+     .      .  150: }
+---
+     .      .  151: 
+     .      .  152: char* random_key_generator(int length) {
+     .      .  153:   int i;
+     .      .  154:   char *key = (char*) malloc(length + 1);
+     .      .  155:   for (i = 0; i < length; i++)
+ROUTINE ====================== thread_list_insert in /w/home.21/cs/ugrad/luant/cs111/lab2b/lab2_list.c
+  1658   1666 Total samples (flat / cumulative)
+     .      .   71:     fprintf(stderr, "Error deleting an element in the list\n");
+     .      .   72:     exit(2);
+     .      .   73:   }
+     .      .   74: }
+     .      .   75: 
+---
+     .      .   76: void thread_list_insert(int thread_index) {
+     .      .   77:   int i;
+     .      .   78:   int size = numThreads * numIterations;
+     .      .   79:   for (i = thread_index; i < size; i += numThreads) {
+     .      .   80:     if (opt_sync) {
+     .      .   81:       if (lock_type == MUTEX) {
+     .      .   82: 	pthread_mutex_lock(&m_lock);
+     .      .   83: 	SortedList_insert(list, &elements[i]);
+     .      .   84: 	pthread_mutex_unlock(&m_lock);
+     .      .   85:       }
+     .      .   86:       else if (lock_type == SPIN_LOCK) {
+  1658   1658   87: 	while (__sync_lock_test_and_set(&s_lock, 1));
+     .      8   88: 	SortedList_insert(list, &elements[i]);
+     .      .   89: 	__sync_lock_release(&s_lock);
+     .      .   90:       }
+     .      .   91:     } else {
+     .      .   92:       SortedList_insert(list, &elements[i]);
+     .      .   93:     }
+     .      .   94:   }
+     .      .   95: }
+---
+     .      .   96: 
+     .      .   97: void thread_list_length() {
+     .      .   98:   int length;
+     .      .   99: 
+     .      .  100:   if (opt_sync) {
+ROUTINE ====================== thread_list_insert in /w/home.21/cs/ugrad/luant/cs111/lab2b/lab2_list.c
+  1658   1666 Total samples (flat / cumulative)
+     .      .   71:     fprintf(stderr, "Error deleting an element in the list\n");
+     .      .   72:     exit(2);
+     .      .   73:   }
+     .      .   74: }
+     .      .   75: 
+---
+     .      .   76: void thread_list_insert(int thread_index) {
+     .      .   77:   int i;
+     .      .   78:   int size = numThreads * numIterations;
+     .      .   79:   for (i = thread_index; i < size; i += numThreads) {
+     .      .   80:     if (opt_sync) {
+     .      .   81:       if (lock_type == MUTEX) {
+     .      .   82: 	pthread_mutex_lock(&m_lock);
+     .      .   83: 	SortedList_insert(list, &elements[i]);
+     .      .   84: 	pthread_mutex_unlock(&m_lock);
+     .      .   85:       }
+     .      .   86:       else if (lock_type == SPIN_LOCK) {
+  1658   1658   87: 	while (__sync_lock_test_and_set(&s_lock, 1));
+     .      8   88: 	SortedList_insert(list, &elements[i]);
+     .      .   89: 	__sync_lock_release(&s_lock);
+     .      .   90:       }
+     .      .   91:     } else {
+     .      .   92:       SortedList_insert(list, &elements[i]);
+     .      .   93:     }
+     .      .   94:   }
+     .      .   95: }
+---
+     .      .   96: 
+     .      .   97: void thread_list_length() {
+     .      .   98:   int length;
+     .      .   99: 
+     .      .  100:   if (opt_sync) {
+ROUTINE ====================== thread_list_length in /w/home.21/cs/ugrad/luant/cs111/lab2b/lab2_list.c
+    24     24 Total samples (flat / cumulative)
+     .      .   92:       SortedList_insert(list, &elements[i]);
+     .      .   93:     }
+     .      .   94:   }
+     .      .   95: }
+     .      .   96: 
+---
+     .      .   97: void thread_list_length() {
+     .      .   98:   int length;
+     .      .   99: 
+     .      .  100:   if (opt_sync) {
+     .      .  101:     if (lock_type == MUTEX) {
+     .      .  102:       pthread_mutex_lock(&m_lock);
+     .      .  103:       length = SortedList_length(list);
+     .      .  104:       pthread_mutex_unlock(&m_lock);
+     .      .  105:     }
+     .      .  106:     else if (lock_type == SPIN_LOCK) {
+    24     24  107:       while (__sync_lock_test_and_set(&s_lock, 1));
+     .      .  108:       length = SortedList_length(list);
+     .      .  109:       __sync_lock_release(&s_lock);
+     .      .  110:     }
+     .      .  111:   }
+     .      .  112:   else {
+     .      .  113:     length = SortedList_length(list);
+     .      .  114:   }
+     .      .  115: 
+     .      .  116:   if (length == -1) {
+     .      .  117:     fprintf(stderr, "The list is corrupted. Incorrect length\n");
+     .      .  118:     exit(2);
+     .      .  119:   }
+     .      .  120: }
+---
+     .      .  121: 
+     .      .  122: void thread_list_delete(int thread_index) {
+     .      .  123:   int i;
+     .      .  124:   int size = numThreads * numIterations;
+     .      .  125:   for (i = thread_index; i < size; i += numThreads) {
+ROUTINE ====================== thread_list_length in /w/home.21/cs/ugrad/luant/cs111/lab2b/lab2_list.c
+    24     24 Total samples (flat / cumulative)
+     .      .   92:       SortedList_insert(list, &elements[i]);
+     .      .   93:     }
+     .      .   94:   }
+     .      .   95: }
+     .      .   96: 
+---
+     .      .   97: void thread_list_length() {
+     .      .   98:   int length;
+     .      .   99: 
+     .      .  100:   if (opt_sync) {
+     .      .  101:     if (lock_type == MUTEX) {
+     .      .  102:       pthread_mutex_lock(&m_lock);
+     .      .  103:       length = SortedList_length(list);
+     .      .  104:       pthread_mutex_unlock(&m_lock);
+     .      .  105:     }
+     .      .  106:     else if (lock_type == SPIN_LOCK) {
+    24     24  107:       while (__sync_lock_test_and_set(&s_lock, 1));
+     .      .  108:       length = SortedList_length(list);
+     .      .  109:       __sync_lock_release(&s_lock);
+     .      .  110:     }
+     .      .  111:   }
+     .      .  112:   else {
+     .      .  113:     length = SortedList_length(list);
+     .      .  114:   }
+     .      .  115: 
+     .      .  116:   if (length == -1) {
+     .      .  117:     fprintf(stderr, "The list is corrupted. Incorrect length\n");
+     .      .  118:     exit(2);
+     .      .  119:   }
+     .      .  120: }
+---
+     .      .  121: 
+     .      .  122: void thread_list_delete(int thread_index) {
+     .      .  123:   int i;
+     .      .  124:   int size = numThreads * numIterations;
+     .      .  125:   for (i = thread_index; i < size; i += numThreads) {
+ROUTINE ====================== thread_list_delete in /w/home.21/cs/ugrad/luant/cs111/lab2b/lab2_list.c
+   831    850 Total samples (flat / cumulative)
+     .      .  117:     fprintf(stderr, "The list is corrupted. Incorrect length\n");
+     .      .  118:     exit(2);
+     .      .  119:   }
+     .      .  120: }
+     .      .  121: 
+---
+     .      .  122: void thread_list_delete(int thread_index) {
+     .      .  123:   int i;
+     .      .  124:   int size = numThreads * numIterations;
+     .      .  125:   for (i = thread_index; i < size; i += numThreads) {
+     .      .  126:     if (opt_sync) {
+     .      .  127:       if (lock_type == MUTEX) {
+     .      .  128: 	pthread_mutex_lock(&m_lock);
+     .      .  129: 	normal_SortedList_delete(list, elements[i].key);
+     .      .  130: 	pthread_mutex_unlock(&m_lock);
+     .      .  131:       }
+     .      .  132:       else if (lock_type == SPIN_LOCK) {
+   831    831  133: 	while(__sync_lock_test_and_set(&s_lock, 1));
+     .     19  134: 	normal_SortedList_delete(list, elements[i].key);
+     .      .  135: 	__sync_lock_release(&s_lock);
+     .      .  136:       }
+     .      .  137:     }
+     .      .  138:     else {
+     .      .  139:       normal_SortedList_delete(list, elements[i].key);
+     .      .  140:     }
+     .      .  141:   }
+     .      .  142: }
+---
+     .      .  143: 
+     .      .  144: void* list_operation(void *threadInfo) {
+     .      .  145:   struct ThreadInfo *info = (struct ThreadInfo*) threadInfo;
+     .      .  146:   thread_list_insert(info->index);
+     .      .  147:   thread_list_length();
+ROUTINE ====================== thread_list_delete in /w/home.21/cs/ugrad/luant/cs111/lab2b/lab2_list.c
+   831    850 Total samples (flat / cumulative)
+     .      .  117:     fprintf(stderr, "The list is corrupted. Incorrect length\n");
+     .      .  118:     exit(2);
+     .      .  119:   }
+     .      .  120: }
+     .      .  121: 
+---
+     .      .  122: void thread_list_delete(int thread_index) {
+     .      .  123:   int i;
+     .      .  124:   int size = numThreads * numIterations;
+     .      .  125:   for (i = thread_index; i < size; i += numThreads) {
+     .      .  126:     if (opt_sync) {
+     .      .  127:       if (lock_type == MUTEX) {
+     .      .  128: 	pthread_mutex_lock(&m_lock);
+     .      .  129: 	normal_SortedList_delete(list, elements[i].key);
+     .      .  130: 	pthread_mutex_unlock(&m_lock);
+     .      .  131:       }
+     .      .  132:       else if (lock_type == SPIN_LOCK) {
+   831    831  133: 	while(__sync_lock_test_and_set(&s_lock, 1));
+     .     19  134: 	normal_SortedList_delete(list, elements[i].key);
+     .      .  135: 	__sync_lock_release(&s_lock);
+     .      .  136:       }
+     .      .  137:     }
+     .      .  138:     else {
+     .      .  139:       normal_SortedList_delete(list, elements[i].key);
+     .      .  140:     }
+     .      .  141:   }
+     .      .  142: }
+---
+     .      .  143: 
+     .      .  144: void* list_operation(void *threadInfo) {
+     .      .  145:   struct ThreadInfo *info = (struct ThreadInfo*) threadInfo;
+     .      .  146:   thread_list_insert(info->index);
+     .      .  147:   thread_list_length();

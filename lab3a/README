@@ -1,0 +1,10 @@
+# NAME: John Tran
+# EMAIL: johntran627@gmail.com
+# UID: 005183495
+
+
+Makefile: builds necessary targets to test and run the program
+
+README: descriptions of each required files
+
+lab3a.c: a program that analyzes the file system in that image file and output a summary to standard out (describing the super block, groups, free-lists, inodes, indirect blocks, and directories).

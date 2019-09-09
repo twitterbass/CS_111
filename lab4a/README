@@ -1,0 +1,34 @@
+# NAME: John Tran
+# EMAIL: johntran627@gmail.com
+# UID: 005183495
+
+
+My Beaglebone Info:
+   S/N: BBGW17050241
+   MAC: 2CF7F1065FF1
+
+
+README: This file consists of the information of my Beaglebone & the descriptions of the
+other files
+
+
+my_beaglebone.jpg: a selfie of me & the Beaglebone
+
+
+connected.jpg: a screen shoot from a USB terminal command session connected to my system.
+	       I also gave it a name & configured network access
+
+
+copy.png: a screen shot of a local session when I copied the "hello world" program from 
+	  my laptop to my Beaglebone
+
+
+build_run.png: a screen shot from a Wifi SSH session where I built & ran the program
+
+
+git.png: a screen shot from a Wifi session where I installed git & cloned a repository
+
+
+Makefile: contains targets to make a tarball of all necessary files
+
+	

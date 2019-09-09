@@ -1,0 +1,12 @@
+# NAME: John Tran
+# EMAIL: johntran627@gmail.com..
+# UID: 005183495
+
+
+Makefile: build necessary target to run & test the program
+
+lab4b.c: a program that runs in an embedded system, read data from external sensors, and log the results
+
+README: descriptions of each included file
+
+test.sh: a test script to test each option of the program: log, period, stop/start, scale
