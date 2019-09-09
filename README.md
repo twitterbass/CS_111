@@ -1,1 +1,2 @@
-CS 111 - Summer 2019 - Prof. Peter Reiher
+CS 111 - Operating Systems Principles
+Summer 2019 - Prof. Peter Reiher
